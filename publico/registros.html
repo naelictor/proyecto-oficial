@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Administración · Campeonato Socavón</title>
+    <link rel="icon" href="imagenes/logo.png">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link href="estilos.css" rel="stylesheet" />
+  </head>
+  <body onload="protegerPanel()" class="admin-page">
+    <nav class="admin-topbar">
+      <div class="container admin-topbar__content">
+        <a class="admin-brand" href="index.html"
+          ><img src="imagenes/logo.png" alt="Logo Socavón" /><span
+            ><strong>Campeonato Socavón</strong
+            ><small>Panel administrativo</small></span
+          ></a
+        >
+        <div class="admin-topbar__actions">
+          <span class="admin-user"
+            ><i class="bi bi-person-circle"></i> Administrador</span
+          ><button
+            class="btn btn-light btn-sm action-btn"
+            onclick="cerrarSesion()"
+          >
+            <i class="bi bi-box-arrow-right"></i><span>Salir</span>
+          </button>
+        </div>
+      </div>
+    </nav>
+    <main class="container admin-layout py-4 py-md-5">
+      <header class="admin-welcome">
+        <div>
+          <p>CAMPEONATO INTERNO 2026</p>
+          <h1>Buenas tardes, administrador</h1>
+          <span>Organiza la jornada deportiva de la Unidad Educativa.</span>
+        </div>
+        <div class="admin-welcome__ball"><i class="bi bi-trophy-fill"></i></div>
+      </header>
+      <nav class="admin-tabs" aria-label="Secciones del panel">
+        <button class="admin-tab is-active" data-panel="panel-jugadores">
+          <i class="bi bi-people"></i><span>Jugadores</span>
+        </button>
+        <button class="admin-tab" data-panel="panel-partidos">
+          <i class="bi bi-trophy"></i><span>Partidos</span>
+        </button>
+        <button class="admin-tab" data-panel="panel-anuncios">
+          <i class="bi bi-megaphone"></i><span>Anuncios</span>
+        </button>
+        <button class="admin-tab" data-panel="panel-ajustes">
+          <i class="bi bi-gear"></i><span>Ajustes</span>
+        </button>
+      </nav>
+      <section id="panel-jugadores" class="admin-panel is-active">
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <article class="admin-card">
+              <header>
+                <span class="section-kicker">NUEVO REGISTRO</span>
+                <h2>Registrar jugador</h2>
+              </header>
+              <form id="formJugador" class="demo-form">
+                <label
+                  >Nombres<input
+                    class="form-control"
+                    id="jugadorNombre" placeholder="Ej. Carlos Andrés" required /></label
+                ><label
+                    >Apellidos<input
+                    class="form-control"
+                    id="jugadorApellido" placeholder="Ej. Quispe Flores" required
+                /></label>
+                <label>C.I.<input id="jugadorCi" class="form-control" placeholder="Ej. 12345678" maxlength="8" required /></label>
+                <div class="form-row">
+                  <label
+                    >Edad<input
+                      class="form-control"
+                      type="number"
+                      id="jugadorEdad" placeholder="16" min="5" max="99" required /></label
+                  ><label>Curso<select id="jugadorCurso" class="form-select" required>
+                      <option value="">Seleccionar</option>
+                      <option>1ro A</option>
+                      <option>1ro B</option>
+                      <option>2do A</option>
+                      <option>2do B</option>
+                      <option>3ro A</option>
+                      <option>3ro B</option>
+                      <option>3ro C</option>
+                      <option>4to A</option>
+                      <option>4to B</option>
+                      <option>4to C</option>
+                      <option>5to A</option>
+                      <option>5to B</option>
+                      <option>5to C</option>
+                      <option>6to A</option>
+                      <option>6to B</option>
+                      <option>6to C</option>
+                  </select></label>
+                <label>Fecha de nacimiento<input id="jugadorNacimiento" class="form-control" type="date" required/></label>
+                <label>Celular (opcional)<input id="jugadorCelular" class="form-control" inputmode="numeric" placeholder="Ej. 71234567" maxlength="8"/></label>
+                <input id="jugadorCategoria" type="hidden" value="Futsal"/>
+                </div>
+                <label>Equipo<input id="jugadorEquipo" class="form-control" placeholder="Equipo 1" required>
+                <button class="btn btn-primary w-100 mt-2" type="submit">
+                  <i class="bi bi-person-plus-fill me-1"></i>Registrar jugador
+                </button>
+              </form>
+            </article>
+          </div>
+          <div class="col-lg-8">
+            <article class="admin-card h-100">
+              <header class="admin-card__table-head">
+                <div>
+                  <span class="section-kicker">LISTADO GENERAL</span>
+                  <h2>Jugadores registrados</h2>
+                </div>
+              </header>
+              <div class="admin-search">
+                <i class="bi bi-search"></i><input id="buscarJugadores" placeholder="Buscar por nombre, apellido, curso o equipo" />
+              </div>
+              <div class="table-responsive">
+                <table class="table admin-table align-middle">
+                  <thead>
+                    <tr>
+                      <th>Jugador</th>
+                      <th>Equipo</th>
+                      <th>Curso</th>
+                      <th>Estado</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody id="tablaJugadores"></tbody>
+                </table>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section id="panel-partidos" class="admin-panel">
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <article class="admin-card">
+              <header>
+                <span class="section-kicker">NUEVO PARTIDO</span>
+                <h2>Programar encuentro</h2>
+              </header>
+              <form id="formPartido" class="demo-form">
+                <label>Equipo local<input id="partidoLocal" class="form-control" placeholder="Ej. 5to A" required /></label>
+                <label>Equipo visitante<input id="partidoVisitante" class="form-control" placeholder="Ej. 5to B" required /></label>
+                <div class="form-row">
+                  <label>Fecha<input id="partidoFecha" class="form-control" type="date" required /></label
+                  ><label>Hora<input id="partidoHora" class="form-control" type="time" required /></label>
+                </div>
+                <label>Cancha<select id="partidoCancha" class="form-select" required>
+                    <option value="">Seleccionar cancha</option>
+                    <option>Cancha principal</option>
+                    <option>Cancha de afuera</option>
+                  </select></label>
+                  <button class="btn btn-primary w-100 mt-2" type="submit">
+                  <i class="bi bi-calendar-plus me-1"></i>Programar partido
+                </button>
+              </form>
+            </article>
+          </div>
+          <div class="col-lg-8">
+            <article class="admin-card h-100">
+              <header class="admin-card__table-head">
+                <div>
+                  <span class="section-kicker">JORNADA 01</span>
+                  <h2>Próximos partidos</h2>
+                </div>
+                <button id="generarRol" type="button" class="btn btn-warning btn-sm">
+                  <i class="bi bi-magic"></i> Generar rol
+                </button>
+              </header>
+              <div id="listaPartidos" class="fixture-list"></div>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section id="panel-anuncios" class="admin-panel">
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <article class="admin-card">
+              <header>
+                <span class="section-kicker">COMUNICADO</span>
+                <h2>Publicar anuncio</h2>
+              </header>
+              <form id="formAnuncio" class="demo-form">
+                <label>Título
+                  <input class="form-control"
+                    id="anuncioTitulo" placeholder="Ej. Cambio de horario" required/></label>
+                    <label>Mensaje<textarea class="form-control"
+                    rows="6" id="anuncioContenido" placeholder="Escribe la información para estudiantes y familias..." required
+                  ></textarea></label>
+                  <button class="btn btn-primary w-100 mt-2" type="submit"><i class="bi bi-send-fill me-1"></i>Publicar anuncio</button>
+              </form>
+            </article>
+          </div>
+          <div class="col-lg-8">
+            <article class="admin-card h-100">
+              <header>
+                <span class="section-kicker">PUBLICADOS</span>
+                <h2>Anuncios recientes</h2>
+              </header>
+              <div id="listaAnuncios" class="notice-list"></div>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section id="panel-ajustes" class="admin-panel">
+        <article class="admin-card settings-card">
+          <header>
+            <span class="section-kicker">CONFIGURACIÓN</span>
+            <h2>Datos del campeonato</h2>
+          </header>
+          <div class="settings-grid">
+            <label>Nombre del campeonato<input
+                class="form-control"
+                value="Campeonato Interno 2026" /></label>
+            <label
+              >Unidad educativa<input
+                class="form-control"
+                value="N. S. del Socavón 2" /></label>
+            <label>Deporte principal<select class="form-select">
+                <option>Futsal</option>
+                <option>Básquet</option>
+                <option>Voleibol</option>
+              </select></label>
+              <label>Estado<select class="form-select">
+                <option>Inscripciones abiertas</option>
+                <option>Inscripciones cerradas</option>
+              </select></label>
+          </div>
+          <button class="btn btn-primary mt-4">
+            <i class="bi bi-check2-circle me-1"></i>Guardar cambios
+          </button>
+        </article>
+      </section>
+    </main>
+    <div class="demo-toast" id="demoToast">
+      <i class="bi bi-check-circle-fill"></i
+      ><span>Acción preparada correctamente.</span>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>

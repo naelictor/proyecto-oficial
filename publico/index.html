@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>U.E. Nuestra Señora del Socavón 2</title>
+    <link rel="icon" href="imagenes/logo.png">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link href="estilos.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="loader" class="loader"><span></span></div>
+    <div class="topbar py-2">
+      <div class="container d-flex justify-content-between">
+        <span><i class="bi bi-geo-alt-fill me-1"></i>Oruro, Bolivia</span>
+        <span><i class="bi bi-telephone-fill me-1"></i>Informaciones: 74141983</span>
+      </div>
+    </div>
+    <nav class="navbar navbar-expand-lg sticky-top">
+      <div class="container">
+        <a class="navbar-brand fw-bold d-flex align-items-center" href="#inicio"
+          ><img src="imagenes/logo.png" class="brand-logo me-2" /><span
+            >U.E. N. S. del Socavón 2<small class="d-block fw-normal text-muted"
+              >Comunidad educativa</small
+            ></span
+          ></a
+        ><button
+          class="navbar-toggler"
+          data-bs-toggle="collapse"
+          data-bs-target="#menu"
+        >
+          <i class="bi bi-list fs-2"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="menu">
+          <ul class="navbar-nav ms-auto align-items-lg-center">
+            <li class="nav-item">
+              <a class="nav-link" href="#nosotros">Nosotros</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#oferta">Oferta educativa</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#partidos">Campeonato</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#galeria">Galería</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contacto">Contacto</a>
+            </li>
+            <li class="nav-item ms-lg-2">
+              <button
+                class="btn btn-primary action-btn"
+                data-bs-toggle="modal"
+                data-bs-target="#login"
+              >
+                <i class="bi bi-shield-lock me-1"></i> Administración
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <header id="inicio" class="hero">
+      <div class="hero-slides" aria-hidden="true">
+        <div
+          class="hero-slide is-active"
+          style="
+            background-image: url(&quot;imagenes/imagen-frente-colegio.png&quot;);
+          "
+        ></div>
+        <div
+          class="hero-slide"
+          style="
+            background-image: url(&quot;imagenes/f4a2f48a-27e3-4a82-9827-e9b2d58798d0.jpg&quot;);
+          "
+        ></div>
+        <div
+          class="hero-slide"
+          style="
+            background-image: url(&quot;imagenes/6dc11c2c-47e8-43bb-9634-f03996b6d31e.jpg&quot;);
+          "
+        ></div>
+        <div
+          class="hero-slide"
+          style="background-image: url(&quot;imagenes/e076c81d-a74f-40d9-afce-2495fdee8594.jpg&quot;)"
+        ></div>
+      </div>
+      <div class="container">
+        <span class="hero-badge">ORURO · BOLIVIA</span>
+        <h1 class="display-4 fw-bold mt-3 col-lg-7">
+          Mente sana,<br />fuerte corazón.
+        </h1>
+        <p class="lead col-lg-6">
+          Una educación humana, técnica y comprometida con el futuro de nuestros
+          estudiantes.
+        </p>
+        <a class="btn btn-warning action-btn mt-2" href="#nosotros"
+          >Conoce nuestra historia <i class="bi bi-arrow-down ms-1"></i
+        ></a>
+      </div>
+      <div class="hero-controls">
+        <button
+          type="button"
+          class="hero-control"
+          id="heroPrev"
+          aria-label="Imagen anterior"
+        >
+          <i class="bi bi-arrow-left"></i>
+        </button>
+        <div class="hero-dots" id="heroDots"></div>
+        <button
+          type="button"
+          class="hero-control"
+          id="heroNext"
+          aria-label="Imagen siguiente"
+        >
+          <i class="bi bi-arrow-right"></i>
+        </button>
+      </div>
+    </header>
+    <main>
+      <section id="nosotros" class="container py-5 py-lg-6">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-6">
+            <p class="section-kicker">Desde 1953</p>
+            <h2 class="section-title display-6">
+              Una historia de servicio y esperanza
+            </h2>
+            <p class="texto">
+              La Unidad Educativa Nuestra Señora del Socavón nació para acoger,
+              educar y acompañar a niñas, niños y jóvenes de Oruro. Su comunidad
+              se inspira en la fe, el esfuerzo y la formación integral.
+            </p>
+            <p class="texto">
+              La presencia de la Orden Siervos de María y de educadoras
+              comprometidas permitió consolidar un espacio abierto a estudiantes
+              de diversas procedencias, con el propósito de brindar
+              oportunidades reales de aprendizaje y crecimiento.
+            </p>
+            <div class="story-card p-4 rounded-3 mt-4">
+              <p class="mb-0 fst-italic">
+                “La escuela abrió sus aulas para los niños y niñas que no podían
+                ingresar a otros establecimientos.”
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div>
+              <img class="img-fluid rounded-4 shadow"
+              src="imagenes/logo socavon.jpg"
+              alt="Nuestra Señora del Socavón"/>
+            </div>
+            <div class="school-quote p-4 mt-3">
+              <i class="bi bi-heart-fill me-2"></i
+              ><strong
+                >Formamos con valores, conocimiento y vocación de
+                servicio.</strong
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="oferta" class="py-5 bg-white">
+        <div class="container">
+          <div class="text-center mb-5">
+            <p class="section-kicker">Formación integral</p>
+            <h2 class="section-title display-6">Aprender para transformar</h2>
+            <p class="text-muted">
+              Una propuesta que une la formación humanística, técnica y
+              sociocomunitaria.
+            </p>
+          </div>
+          <div class="row g-4">
+            <div class="col-md-4">
+              <article class="feature-card">
+                <div class="feature-icon mb-3"><i class="bi bi-book"></i></div>
+                <h3 class="h4">Educación con valores</h3>
+                <p class="mb-0 text-muted">
+                  Acompañamiento cercano y formación basada en el respeto, la
+                  responsabilidad y la comunidad.
+                </p>
+              </article>
+            </div>
+            <div class="col-md-4">
+              <article class="feature-card">
+                <div class="feature-icon mb-3">
+                  <i class="bi bi-laptop"></i>
+                </div>
+                <h3 class="h4">Bachillerato Técnico Humanístico</h3>
+                <p class="mb-0 text-muted">
+                  Fortalecemos capacidades para la vida, la continuidad de
+                  estudios y el mundo laboral.
+                </p>
+                <button type="button" class="btn btn-danger mt-2 w-100" data-bs-toggle="modal" data-bs-target="#bachiller" >Saber Mas</button>
+              </article>
+            </div>
+            <div class="col-md-4">
+              <article class="feature-card">
+                <div class="feature-icon mb-3">
+                  <i class="bi bi-trophy"></i>
+                </div>
+                <h3 class="h4">Deporte y convivencia</h3>
+                <p class="mb-0 text-muted">
+                  El deporte escolar promueve disciplina, liderazgo, salud y
+                  trabajo en equipo.
+                </p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="partidos" class="agenda py-5">
+        <div class="container">
+          <div class="row g-4">
+            <div class="col-lg-7">
+              <p class="text-warning fw-bold mb-1">CAMPEONATO ESTUDIANTIL</p>
+              <h2 class="font-serif fw-bold">Rol de partidos</h2>
+              <p class="text-white-50">
+                Consulta fechas, horarios, equipos y canchas de nuestros
+                encuentros.
+              </p>
+              <div id="Partidos-vista" class="card schedule-card">
+                <div class="p-3 border-top">
+                  <a href="registros.html" class="btn btn-outline-danger btn-sm"
+                    >Ver panel del campeonato <i class="bi bi-arrow-right"></i
+                  ></a>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-5">
+              <p class="text-warning fw-bold mb-1">INFORMACIÓN OFICIAL</p>
+              <h2 class="font-serif fw-bold">Anuncios</h2>
+              <div id="Anuncios"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="galeria" class="gallery py-5">
+        <div class="container">
+          <div class="gallery-heading">
+            <div>
+              <p class="section-kicker">Vida escolar</p>
+              <h2 class="section-title display-6 mb-0">
+                Una comunidad en movimiento
+              </h2>
+            </div>
+            <p class="text-muted mb-0">
+              Explora los momentos que hacen grande al Socavón.
+            </p>
+          </div>
+          <div class="gallery-filters" role="tablist" aria-label="Filtrar galería">
+            <button class="gallery-filter is-active" type="button" data-filter="todos">
+              Todo
+            </button>
+            <button class="gallery-filter" type="button" data-filter="deporte">
+              Deporte
+            </button>
+            <button class="gallery-filter" type="button" data-filter="colegio">
+              Colegio
+            </button>
+            <button class="gallery-filter" type="button" data-filter="identidad">
+              Identidad
+            </button>
+          </div>
+          <div class="gallery-showcase">
+            <button
+              class="gallery-card gallery-card--featured"
+              data-category="colegio"
+              data-image="imagenes/imagen-frente-colegio.png"
+              data-title="U.E. Nuestra Señora del Socavón 2"
+              type="button"
+            >
+              <img
+                src="imagenes/imagen-frente-colegio.png"
+                alt="Frente de la Unidad Educativa"
+              /><span
+                ><small>COLEGIO</small><strong>Nuestra casa de estudios</strong
+                ><i class="bi bi-arrows-fullscreen"></i
+              ></span>
+            </button>
+            <button
+              class="gallery-card"
+              data-category="deporte"
+              data-image="imagenes/WhatsApp Image 2026-09-03 at 06.55.55.jpeg"
+              data-title="Campeonato estudiantil"
+              type="button"
+            >
+              <img
+                src="imagenes/WhatsApp Image 2026-09-03 at 06.55.55.jpeg"
+                alt="Partido de futsal estudiantil"
+              /><span
+                ><small>DEPORTE</small><strong>Pasión en la cancha</strong
+                ><i class="bi bi-arrows-fullscreen"></i
+              ></span>
+            </button>
+            <button
+              class="gallery-card"
+              data-category="identidad"
+              data-image="imagenes/f4a2f48a-27e3-4a82-9827-e9b2d58798d0.jpg"
+              data-title="Identidad Socavón"
+              type="button"
+            >
+              <img
+                src="imagenes/f4a2f48a-27e3-4a82-9827-e9b2d58798d0.jpg"
+                alt="Identidad de la unidad educativa"
+              /><span
+                ><small>IDENTIDAD</small><strong>Orgullo Socavón</strong
+                ><i class="bi bi-arrows-fullscreen"></i
+              ></span>
+            </button>
+            <button
+              class="gallery-card"
+              data-category="colegio"
+              data-image="imagenes/imagenFondo.webp"
+              data-title="Comunidad educativa"
+              type="button"
+            >
+              <img
+                src="imagenes/imagenFondo.webp"
+                alt="Comunidad educativa"
+              /><span
+                ><small>COMUNIDAD</small><strong>Aprender juntos</strong
+                ><i class="bi bi-arrows-fullscreen"></i
+              ></span>
+            </button>
+            <article class="gallery-callout">
+              <i class="bi bi-stars"></i>
+              <p>CAMPEONATO 2026</p>
+              <h3>Tu equipo puede hacer historia.</h3>
+              <a href="#partidos"
+                >Conoce el rol <i class="bi bi-arrow-right"></i
+              ></a>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="container py-5">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-7">
+            <p class="section-kicker">Nuestra comunidad</p>
+            <h2 class="section-title">
+              Una escuela que crece junto a sus familias
+            </h2>
+            <p class="text-muted mb-0">
+              Trabajamos con estudiantes, familias, docentes y personal
+              administrativo para construir un ambiente seguro, participativo y
+              de aprendizaje continuo.
+            </p>
+          </div>
+          <div class="col-lg-5">
+            <div class="d-flex gap-3">
+              <i class="bi bi-people-fill fs-1 text-danger"></i>
+              <div>
+                <strong>Educación con propósito</strong>
+                <p class="mb-0 text-muted small">
+                  Comprometidos con Oruro y con la formación de ciudadanos
+                  solidarios.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer pt-5 pb-3" id="contacto">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-lg-5">
+            <h3 class="h5 text-white">U.E. Nuestra Señora del Socavón 2</h3>
+            <p>“Mente sana, fuerte corazón. ¡Adelante Socavón!”</p>
+          </div>
+          <div class="col-lg-3">
+            <h3 class="h6 text-white">Contacto</h3>
+            <p class="mb-0">
+              <i class="bi bi-whatsapp me-1"></i> 74141983<br /><i
+                class="bi bi-geo-alt me-1"
+              ></i>
+              Oruro, Bolivia
+            </p>
+          </div>
+          <div class="col-lg-4">
+            <h3 class="h6 text-white">Horarios</h3>
+            <p class="mb-0">
+              Lunes a viernes: doble turno<br />Sábados: atención a padres
+            </p>
+          </div>
+        </div>
+        <hr class="border-light opacity-25" />
+        <small>© 2026 U.E. Nuestra Señora del Socavón 2. Todos los derechos
+          reservados.</small>
+      </div>
+    </footer>
+    <div class="modal fade" id="login" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <form class="modal-content" onsubmit="iniciarSesion(event)">
+          <div class="modal-header">
+            <h2 class="h5 mb-0">Iniciar sesión</h2>
+            <button class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <input
+              id="usuarioLogin"
+              class="form-control mb-3"
+              placeholder="Usuario"
+              required
+            /><input
+              id="passwordLogin"
+              class="form-control"
+              type="password"
+              placeholder="Contraseña"
+              required
+            />
+            <p id="loginError" class="text-danger small mt-2 mb-0"></p>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary">Ingresar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="modal fade" id="bachiller" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="h5 mb-0 fw-bold">Acerca de Nuestras Carreras</h2>
+            <button class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <div class="m-1">
+              <div class="col-12 border-bottom">
+                <h5 class="text-center section-title">Sistemas informaticos</h5>
+                <p>Información en hardware, software, redes, programación y bases de datos. Desarrollo de competencias tecnológicas.<br></p><p>El Técnico Medio en Sistemas Informáticos esta capacitado para desempeñarse en cualquier tipo de empresa u organixación, realizando tareas de soporte técnico, administración de redes, desarrollo de software y gestión de bases de datos.</p>
+              </div>
+              <div class="col-12 border-bottom">
+                <h5 class="text-center section-title mt-3">Gastronomia</h5>
+                <p>Técnicas culinarias, nutrición, inocuidad alimentaria y cocina boliviana. Formación para el sector gastronómico.<br></p><p>El Técnico Medio en Gastronomía aplica técnicas culinarias y procedimientos básicos en procesos de producción alimenticia, manipulando adecuadamente utensilios, herramientas y aplicando normas de higiene y seguridad alimentaria.</p>
+              </div>
+              <div class="col-12 border-bottom">
+                <h5 class="text-center section-title mt-3">Turismo y Hoteleria</h5>
+                <p>Patrimonio turístico, hotelería, guiado y atención al cliente. Enfoque en el desarrollo turístico local.<br></p><p>El Técnico Medio en Turismo y Hoteleria esta formado con valores sociocomunitarios, enfoque tecnológico y productivo. Conoce el patrimonio turístico boliviano, aplica técnicas de guiado, administración hotelera y atención al cliente.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+      <button class="lightbox__close" type="button" aria-label="Cerrar imagen">
+        <i class="bi bi-x-lg"></i></button
+      ><img id="lightboxImage"/>
+      <p id="lightboxTitle"></p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
