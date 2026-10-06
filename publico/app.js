@@ -288,6 +288,150 @@ function activarPanelAdministrativo() {
         .join("") ||
       `<tr><td colspan="5">Aún no hay jugadores registrados.</td></tr>`;
   };
+
+  let jugadoresConsulta = [];
+
+  const obtenerJugadoresFiltrados = () => {
+    const nombre = document.querySelector("#filtroNombre")?.value.trim().toLowerCase() || "";
+    const apellido = document.querySelector("#filtroApellido")?.value.trim().toLowerCase() || "";
+    const equipo = document.querySelector("#filtroEquipo")?.value.trim().toLowerCase() || "";
+
+    return jugadoresConsulta.filter((jugador) =>
+      jugador.nombre.toLowerCase().includes(nombre) &&
+      jugador.apellido.toLowerCase().includes(apellido) &&
+      jugador.equipo.toLowerCase().includes(equipo),
+    );
+  };
+
+  const mostrarJugadoresDeConsulta = () => {
+    const tabla = document.querySelector("#tablaConsultaJugadores");
+
+    if (!tabla) return;
+
+    const jugadores = obtenerJugadoresFiltrados();
+    tabla.innerHTML =
+      jugadores
+        .map(
+          (jugador) => `
+            <tr>
+              <td><strong>${escapar(`${jugador.nombre} ${jugador.apellido}`)}</strong></td>
+              <td>${escapar(jugador.equipo)}</td>
+              <td>${escapar(jugador.curso)}</td>
+              <td>${escapar(jugador.edad)}</td>
+            </tr>`,
+        )
+        .join("") ||
+      `<tr><td colspan="4">No se encontraron jugadores.</td></tr>`;
+  };
+
+  const cargarListaDeConsulta = async () => {
+    jugadoresConsulta = await api("jugadores");
+    mostrarJugadoresDeConsulta();
+  };
+
+  const generarPdfDeJugadores = () => {
+    if (!window.jspdf) {
+      avisar("No se pudo cargar el generador de PDF.", true);
+      return;
+    }
+
+    const jugadores = obtenerJugadoresFiltrados();
+    const { jsPDF } = window.jspdf;
+    const documento = new jsPDF({ unit: "mm", format: "a4" });
+    const columnas = ["Jugador", "Equipo", "Curso", "Edad"];
+    const posiciones = [16, 84, 132, 169];
+    const anchos = [62, 42, 31, 18];
+    const fecha = new Intl.DateTimeFormat("es-BO", {
+      dateStyle: "long",
+    }).format(new Date());
+    let y = 53;
+
+    const dibujarEncabezado = () => {
+      documento.setFillColor(154, 21, 44);
+      documento.rect(0, 0, 210, 30, "F");
+      documento.setFillColor(31, 58, 99);
+      documento.rect(0, 30, 210, 3, "F");
+      documento.setTextColor(255, 255, 255);
+      documento.setFont("helvetica", "bold");
+      documento.setFontSize(17);
+      documento.text("Lista de Jugadores", 16, 16);
+      documento.setFont("helvetica", "normal");
+      documento.setFontSize(9);
+      documento.text("Campeonato Interno · Unidad Educativa Nuestra Señora del Socavón 2", 16, 23);
+      documento.setTextColor(45, 45, 45);
+      documento.setFontSize(9);
+      documento.text(`Generado el ${fecha}`, 16, 42);
+      documento.text(`Jugadores mostrados: ${jugadores.length}`, 194, 42, { align: "right" });
+      y = 53;
+    };
+
+    const dibujarCabeceraTabla = () => {
+      documento.setFillColor(31, 58, 99);
+      documento.roundedRect(14, y - 6, 182, 8, 1, 1, "F");
+      documento.setTextColor(255, 255, 255);
+      documento.setFontSize(9);
+      documento.setFont("helvetica", "bold");
+      columnas.forEach((columna, indice) => {
+        documento.text(columna, posiciones[indice], y);
+      });
+      documento.setTextColor(45, 45, 45);
+      documento.setFont("helvetica", "normal");
+      y += 8;
+    };
+
+    const nuevaPagina = () => {
+      documento.addPage();
+      dibujarEncabezado();
+      dibujarCabeceraTabla();
+    };
+
+    dibujarEncabezado();
+    dibujarCabeceraTabla();
+
+    if (jugadores.length === 0) {
+      documento.setTextColor(100, 100, 100);
+      documento.setFontSize(10);
+      documento.text("No hay jugadores que coincidan con los filtros aplicados.", 16, y + 5);
+    }
+
+    jugadores.forEach((jugador, indice) => {
+      const fila = [
+        `${jugador.nombre} ${jugador.apellido}`,
+        jugador.equipo,
+        jugador.curso,
+        String(jugador.edad),
+      ];
+
+      const lineaJugador = documento.splitTextToSize(fila[0], anchos[0]);
+      const alturaFila = Math.max(8, lineaJugador.length * 4 + 4);
+
+      if (y + alturaFila > 278) nuevaPagina();
+
+      if (indice % 2 === 0) {
+        documento.setFillColor(248, 246, 247);
+        documento.rect(14, y - 5, 182, alturaFila, "F");
+      }
+
+      fila.forEach((valor, posicion) => {
+        const texto = posicion === 0 ? lineaJugador : documento.splitTextToSize(String(valor), anchos[posicion]);
+        documento.text(texto, posiciones[posicion], y);
+      });
+      y += alturaFila;
+    });
+
+    const totalPaginas = documento.getNumberOfPages();
+    for (let pagina = 1; pagina <= totalPaginas; pagina += 1) {
+      documento.setPage(pagina);
+      documento.setDrawColor(220, 220, 220);
+      documento.line(14, 286, 196, 286);
+      documento.setTextColor(105, 105, 105);
+      documento.setFontSize(8);
+      documento.text("Campeonato Interno 2026", 14, 291);
+      documento.text(`Página ${pagina} de ${totalPaginas}`, 196, 291, { align: "right" });
+    }
+
+    documento.save("lista-de-jugadores.pdf");
+  };
   const cargarPartidos = async () => {
     const partidos = await api("partidos");
     const lista = document.querySelector("#listaPartidos");
@@ -352,6 +496,7 @@ function activarPanelAdministrativo() {
   const cargarTodo = async () => {
     try {
       await cargarJugadores(); } catch (e){ console.error("Jugadores:", e); }
+      try { await cargarListaDeConsulta(); } catch (e) { console.error("Consulta de jugadores:", e); }
       try { await cargarPartidos(); } catch (e) { console.error("Partidos:", e);}
       try { await cargarAnuncios(); } catch (e) { console.error("Anuncios:", e); }
   };
@@ -377,6 +522,7 @@ function activarPanelAdministrativo() {
         });
         evento.target.reset();
         await cargarJugadores();
+        await cargarListaDeConsulta();
         avisar("Jugador registrado correctamente.");
       } catch (error) {
         avisar(error.message, true);
@@ -471,6 +617,14 @@ function activarPanelAdministrativo() {
         fila.hidden = !fila.textContent.toLowerCase().includes(texto);
       });
     });
+  document
+    .querySelectorAll("#filtroNombre, #filtroApellido, #filtroEquipo")
+    .forEach((filtro) => {
+      filtro.addEventListener("input", mostrarJugadoresDeConsulta);
+    });
+  document
+    .querySelector("#generarPdfJugadores")
+    ?.addEventListener("click", generarPdfDeJugadores);
   document.querySelector("#generarRol")?.addEventListener("click", () => {
     avisar("Registra los encuentros desde el formulario para armar el rol.");
   });
