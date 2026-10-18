@@ -638,4 +638,5 @@ document.addEventListener("DOMContentLoaded", () => {
   prepararCarruselPrincipal();
   activarBotonesDelPanel();
   activarPanelAdministrativo();
+  cargarListaDeConsulta();
 });
